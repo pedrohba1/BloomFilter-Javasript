@@ -1,0 +1,16 @@
+{
+  "name": "BloomFilter-Javasript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pedrohba1/BloomFilter-Javasript.git",
+  "author": "Pedro Bufulin <pedro.almeida@ufu.br>",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.19.2"
+  }
+}
