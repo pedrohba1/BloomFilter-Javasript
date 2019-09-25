@@ -1,4 +1,5 @@
 # BloomFilter-tests
+
 Trabalho especificamente de segurança, mas ficará como um estudo.
 
 Bloom Filters são particularmente eficientes para checar se certos endereços de email
@@ -9,3 +10,5 @@ O bloom filter pode dizer com certeza se algo está ausente, mas não com certez
 
 A vantagem de bloomFilters é que eles usam muito menos espaço do que outras estruturas como a hash table,
 por exemplo. Bloom filter por não usar muito espaço, não gasta tempo com leitura e escrita em disco.
+
+Eu usei javascript ES6 para fazer esse bloom filter. Para fazer ele rodar, tem que rodar o comando 'yar run build' e executar o 'node'na pasta buid
