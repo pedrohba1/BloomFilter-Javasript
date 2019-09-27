@@ -13,12 +13,12 @@ var BloomFilter = function () {
    * @param {number} size - the size of the storage.
    */
   function BloomFilter() {
-    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
+    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20000;
 
     _classCallCheck(this, BloomFilter);
 
-    // Bloom filter size directly affects the likelihood of false positives.
-    // The bigger the size the lower the likelihood of false positives.
+    // O tamanho do Bloom Filter afeta diretamente os falso positivos.
+    // Quanto maior o tamanho, mnenor a chance de ocorrerem falsos positivos.
     this.size = size;
     this.storage = this.createStore(size);
   }
@@ -35,7 +35,7 @@ var BloomFilter = function () {
 
       var hashValues = this.getHashValues(item);
 
-      // Set each hashValue index to true.
+      // Coloca cada valor do hash como verdadeiro
       hashValues.forEach(function (val) {
         return _this.storage.setValue(val);
       });
@@ -53,20 +53,21 @@ var BloomFilter = function () {
 
       for (var hashIndex = 0; hashIndex < hashValues.length; hashIndex += 1) {
         if (!this.storage.getValue(hashValues[hashIndex])) {
-          // We know that the item was definitely not inserted.
+          // Então, sabemos que os valores não foram inseridos
           return false;
         }
       }
 
-      // The item may or may not have been inserted.
+      // O item pode ou nao ter sido inserido
       return true;
     }
 
     /**
-     * Creates the data store for our filter.
-     * We use this method to generate the store in order to
-     * encapsulate the data itself and only provide access
-     * to the necessary methods.
+     *
+     * Cria um storage para encapsular os dados e
+     * apenas utilizar os dados necessários.
+     * O storage é basicamente é inicializado como
+     * um array cheio de 'false'
      *
      * @param {number} size
      * @return {Object}
@@ -77,7 +78,6 @@ var BloomFilter = function () {
     value: function createStore(size) {
       var storage = [];
 
-      // Initialize all indexes to false
       for (var storageCellIndex = 0; storageCellIndex < size; storageCellIndex += 1) {
         storage.push(false);
       }
@@ -107,7 +107,7 @@ var BloomFilter = function () {
       for (var charIndex = 0; charIndex < item.length; charIndex += 1) {
         var char = item.charCodeAt(charIndex);
         hash = (hash << 5) + hash + char;
-        hash &= hash; // Convert to 32bit integer
+        hash &= hash; // Converte para um inteiro de 32bits
         hash = Math.abs(hash);
       }
 
@@ -146,15 +146,14 @@ var BloomFilter = function () {
         var char = item.charCodeAt(charIndex);
         hash = (hash << 5) - hash;
         hash += char;
-        hash &= hash; // Convert to 32bit integer
+        hash &= hash; // Converte para um inteiro de 32bits
       }
 
       return Math.abs(hash % this.size);
     }
 
     /**
-     * Runs all 3 hash functions on the input and returns an array of results.
-     *
+     * Faz as 3 funções de hash na entrada e retorna um array
      * @param {string} item
      * @return {number[]}
      */
