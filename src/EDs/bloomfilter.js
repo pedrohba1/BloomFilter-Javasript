@@ -2,8 +2,8 @@ export default class BloomFilter {
   /**
    * @param {number} size - the size of the storage.
    */
-  constructor(size = 20000) {
-    // O tamanho do Bloom Filter afeta diretamente os falso positivos.
+  constructor(size = 2000000) {
+    // O tamanho do   Bloom Fil ter afeta diretamente os falso positivos.
     // Quanto maior o tamanho, mnenor a chance de ocorrerem falsos positivos.
     this.size = size;
     this.storage = this.createStore(size);

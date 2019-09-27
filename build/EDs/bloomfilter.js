@@ -13,11 +13,11 @@ var BloomFilter = function () {
    * @param {number} size - the size of the storage.
    */
   function BloomFilter() {
-    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20000;
+    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2000000;
 
     _classCallCheck(this, BloomFilter);
 
-    // O tamanho do Bloom Filter afeta diretamente os falso positivos.
+    // O tamanho do   Bloom Fil ter afeta diretamente os falso positivos.
     // Quanto maior o tamanho, mnenor a chance de ocorrerem falsos positivos.
     this.size = size;
     this.storage = this.createStore(size);
